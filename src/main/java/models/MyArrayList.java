@@ -1,9 +1,6 @@
 package models;
-
 import models.interfaces.MyList;
-
 import java.util.Iterator;
-
 import java.util.NoSuchElementException;
 
 public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
@@ -62,7 +59,7 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
 
     @Override
     public void addLast(T item) {
-        add(item);
+        add(length,item);
 
     }
 
@@ -102,8 +99,7 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
     }
 
     private void checkIndex(int index) {
-        checkIndex(index);
-        if (index < 0 || index >= length) {
+        if (index < 0 || index > length) {
             throw new IndexOutOfBoundsException("Index: " + index + " not found");
         }
     }
@@ -136,7 +132,7 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
     @Override
     public int indexOf(Object object) {
         for (int i = 0; i < length; i++) {
-            if (items[i].equals(object)) {
+            if (object == null ? items[i] == null : object.equals(items[i])) {
                 return i;
             }
         }

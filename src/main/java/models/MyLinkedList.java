@@ -26,8 +26,9 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
                 current = current.next;
             }
             current.next = newNode;
-            length++;
+
         }
+        length++;
 
     }
 
@@ -45,8 +46,8 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
                 current = current.next;
                 i++;
             }
-            newNode.next = current.next;
-            current.next = newNode.next;
+            newNode.next = current.next.next;
+            current.next = newNode;
 
         }
 
@@ -56,7 +57,7 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
     public void add(int index, T item) {
         checkInIndex(index);
         MyNode<T> newNode = new MyNode<>(item);
-        if (index == 0) {
+        if (head == null) {
             newNode.next = head;
             head = newNode;
         } else {
@@ -76,7 +77,7 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
     }
 
     private void checkInIndex(int index) {
-        if (index >= length || index < 0) {
+        if (index > length || index < 0) {
             throw new IndexOutOfBoundsException("Index: " + index + " not found!");
         }
     }
@@ -89,7 +90,7 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
 
     @Override
     public void addLast(T item) {
-        add(length - 1, item);
+        add(item);
     }
 
     @Override
@@ -100,7 +101,7 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
             current = current.next;
 
         }
-        return current.data;
+        return current.getData();
     }
 
     @Override
@@ -120,7 +121,7 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
             head = head.next;
         } else {
             MyNode<T> current = head;
-            for (int i = 0; i < index; i++) {
+            for (int i = 0; i < index-1; i++) {
                 current = current.next;
             }
             current.next = current.next.next;
@@ -147,15 +148,20 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
 
     @Override
     public void sort() {
-//        for(int i =0 ; i < length;i++){
-//            for(int j =0 ; j < length -1-i;j++){
-//                if(((T).get[j]).compareTo((T).get[j+1])>0){
-//                    Object temp = (T).get[j];
-//                    (T).set[j] = (T).get[j+1];
-//                    (T).set[j+1] = temp;
-////                }
-//            }
-//        }
+        for(int i =0 ; i < length;i++){
+            MyNode<T> current = head;
+            MyNode<T> currentNext = head.next;
+            for(int j =0 ; j < length -1;j++){
+                if(current.data.compareTo(currentNext.data)>0) {
+                    T temp = current.getData();
+                    current.setData(currentNext.getData());
+                    currentNext.setData(temp);
+                }
+                current = currentNext;
+                currentNext = currentNext.next;
+//
+            }
+        }
 
     }
 
@@ -164,7 +170,8 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
         MyNode<T> node = head;
         int i = 0;
         while (i < length) {
-            if (node == object) {
+            if ((object == null && node.data == null) ||
+                    (object != null && object.equals(node.data))) {
                 return i;
             }
             node = node.next;
