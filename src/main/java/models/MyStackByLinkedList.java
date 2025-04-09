@@ -1,21 +1,23 @@
-public class MyStackByLinkedList {
-    private MyLinkedList<String> stack;
+package models;
+
+public class MyStackByLinkedList <T extends Comparable<T>>{
+    private MyLinkedList<T> stack;
 
     public MyStackByLinkedList(){
         stack = new MyLinkedList<>();
     }
 
-    public String push(String newItem){
+    public T push(T newItem){
         stack.addFirst(newItem);
         return newItem;
     }
 
-    public String peek(){
+    public T peek(){
         return stack.get(0);
     }
 
-    public String pop(){
-        String removingitem  = peek();
+    public T pop(){
+        T removingitem  = peek();
         stack.removeLast();
         return removingitem;
     }

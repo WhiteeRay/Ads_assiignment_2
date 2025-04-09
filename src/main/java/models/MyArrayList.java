@@ -1,8 +1,12 @@
+package models;
+
+import models.interfaces.MyList;
+
 import java.util.Iterator;
 
 import java.util.NoSuchElementException;
 
-public class MyArrayList<T extends Comparable<T>> implements MyList<T>{
+public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
     private Object[] items;
     private int length;
 
@@ -58,7 +62,7 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T>{
 
     @Override
     public void addLast(T item) {
-        add(length,item);
+        add(item);
 
     }
 

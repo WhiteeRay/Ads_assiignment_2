@@ -1,3 +1,7 @@
+package models;
+
+import models.interfaces.MyList;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
