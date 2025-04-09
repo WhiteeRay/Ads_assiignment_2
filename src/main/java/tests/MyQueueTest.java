@@ -33,7 +33,7 @@ public class MyQueueTest {
         // Test 7: Test empty method again
         assert queue.empty() : "Queue should be empty after dequeuing all items";
 
-        // Test 8: Test peek on empty queue (should handle gracefully)
+        // Test 8: Test peek on empty queue
         try {
             queue.peek();
             assert false : "Peek should throw an exception on empty queue";

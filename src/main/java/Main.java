@@ -1,4 +1,3 @@
-import models.MyArrayList;
 import tests.*;
 
 import java.util.Scanner;

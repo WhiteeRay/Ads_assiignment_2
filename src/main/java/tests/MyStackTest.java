@@ -38,7 +38,7 @@ public class MyStackTest {
             stack.peek();
             assert false : "Peek should throw an exception on empty stack";
         } catch (Exception e) {
-            // Expected behavior
+
         }
 
         // Test 9: Test pop on empty stack

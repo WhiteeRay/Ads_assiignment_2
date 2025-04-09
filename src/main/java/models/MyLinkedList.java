@@ -15,6 +15,10 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
     }
 
 
+    /**
+     * Adds an element to the end of the list.
+     * @param item the element to be added
+     */
     @Override
     public void add(T item) {
         MyNode<T> newNode = new MyNode<>(item);
@@ -32,6 +36,12 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
 
     }
 
+
+    /**
+     * Replaces the element at the specified index with the given item.
+     * @param index the index to replace
+     * @param item  the element to be set
+     */
     @Override
     public void set(int index, T item) {
         checkInIndex(index);
@@ -53,6 +63,12 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
 
     }
 
+
+    /**
+     * Inserts an element at the specified index.
+     * @param index the index at which to insert
+     * @param item  the element to insert
+     */
     @Override
     public void add(int index, T item) {
         checkInIndex(index);
@@ -76,23 +92,41 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
 
     }
 
+    /**
+     * Throws IndexOutOfBoundsException if index is invalid.
+     * @param index the index to validate
+     */
     private void checkInIndex(int index) {
         if (index > length || index < 0) {
             throw new IndexOutOfBoundsException("Index: " + index + " not found!");
         }
     }
 
+    /**
+     * Adds an element at the beginning of the list.
+     * @param item the element to add
+     */
     @Override
     public void addFirst(T item) {
         add(0, item);
 
     }
 
+    /**
+     * Adds an element at the end of the list.
+     * @param item the element to add
+     */
     @Override
     public void addLast(T item) {
         add(item);
     }
 
+
+    /**
+     * Returns the element at the specified index.
+     * @param index the position to retrieve
+     * @return the element at the given index
+     */
     @Override
     public T get(int index) {
         checkInIndex(index);
@@ -104,16 +138,31 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
         return current.getData();
     }
 
+
+    /**
+     * Returns the first element of the list.
+     * @return the first element
+     */
     @Override
     public T getFirst() {
         return get(0);
     }
 
+
+    /**
+     * Returns the last element of the list.
+     * @return the last element
+     */
     @Override
     public T getLast() {
         return get(length - 1);
     }
 
+
+    /**
+     * Removes the element at the specified index.
+     * @param index the index of the element to remove
+     */
     @Override
     public void remove(int index) {
         checkInIndex(index);
@@ -131,6 +180,9 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
 
     }
 
+    /**
+     * Removes the first element from the list.
+     */
     @Override
     public void removeFirst() {
         remove(0);
@@ -138,6 +190,9 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
 
     }
 
+    /**
+     * Removes the last element from the list.
+     */
     @Override
     public void removeLast() {
         remove(length - 1);
@@ -145,7 +200,9 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
 
 
 
-
+    /**
+     * Sorts the list using bubble sort algorithm.
+     */
     @Override
     public void sort() {
         for(int i =0 ; i < length;i++){
@@ -159,12 +216,16 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
                 }
                 current = currentNext;
                 currentNext = currentNext.next;
-//
             }
         }
 
     }
 
+    /**
+     * Returns the index of the first occurrence of the specified object.
+     * @param object the object to search for
+     * @return index of the object, or -1 if not found
+     */
     @Override
     public int indexOf(Object object) {
         MyNode<T> node = head;
@@ -180,6 +241,11 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
         return -1;
     }
 
+    /**
+     * Returns the index of the last occurrence of the specified object.
+     * @param object the object to search for
+     * @return last index of the object, or -1 if not found
+     */
     @Override
     public int lastIndexOf(Object object) {
         int index = 0;
@@ -198,12 +264,22 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
         return lastIndex;
     }
 
+
+    /**
+     * Checks if the list contains the specified object.
+     * @param object the object to find
+     * @return true if present, otherwise false
+     */
     @Override
     public boolean exists(Object object) {
         return indexOf(object) != -1;
     }
 
 
+    /**
+     * Returns a new array containing all elements in the list.
+     * @return an array of the list's contents
+     */
     @Override
     public Object[] toArray() {
         Object[] newArray = new Object[length];
@@ -220,7 +296,9 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
     }
 
 
-
+    /**
+     * Clears all elements from the list.
+     */
     @Override
     public void clear() {
         head = null;
@@ -228,11 +306,20 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
 
     }
 
+    /**
+     * Returns the number of elements in the list.
+     * @return the list size
+     */
     @Override
     public int size() {
         return length;
     }
 
+
+    /**
+     * Returns an iterator over the list elements.
+     * @return an iterator for the list
+     */
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {

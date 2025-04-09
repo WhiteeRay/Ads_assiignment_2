@@ -12,6 +12,10 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
         length = 0;
     }
 
+    /**
+     * Adds the specified element to the end of the list.
+     * @param item the element to be added
+     */
     @Override
     public void add(T item) {
         if (length == items.length) {
@@ -20,6 +24,9 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
         items[length++] = item;
     }
 
+    /**
+     * Doubles the internal array size to accommodate more elements.
+     */
     private void increaseCapacity() {
         Object[] newItems = new Object[items.length * 2];
         for (int i = 0; i < items.length; i++) {
@@ -28,6 +35,11 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
         items = newItems;
     }
 
+    /**
+     * Replaces the element at the specified index with the given item.
+     * @param index the index to replace
+     * @param item  the element to be set
+     */
     @Override
     public void set(int index, T item) {
         checkIndex(index);
@@ -36,6 +48,12 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
 
     }
 
+
+    /**
+     * Shifts elements to the right to create space at specified position and adds the element there.
+     * @param index   the position to insert the element at
+     * @param item the element to be inserted at the specified position
+     */
     @Override
     public void add(int index, T item) {
         checkIndex(index);
@@ -51,43 +69,74 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
 
     }
 
+
+    /**
+     * Adds an element at the beginning of the list.
+     * @param item the element to add
+     */
     @Override
     public void addFirst(T item) {
         add(0,item);
 
     }
 
+
+    /**
+     * Adds an element at the end of the list.
+     * @param item the element to add
+     */
     @Override
     public void addLast(T item) {
         add(length,item);
 
     }
 
+
+    /**
+     * Returns the element at the specified index.
+     * @param index the position to retrieve
+     * @return the element at the given index
+     */
     @Override
     public T get(int index) {
         checkIndex(index);
         return (T) items[index];
     }
 
+    /**
+     * Checks if the list is empty and throws exception if true.
+     */
     private void checkIfEmpty() {
         if (length == 0) {
             throw new NoSuchElementException("The list is empty.");
         }
     }
 
-
+    /**
+     * Returns the first element of the list.
+     * @return the first element
+     */
     @Override
     public T getFirst() {
         checkIfEmpty();
         return (T) items[0];
     }
 
+    /**
+     * Returns the last element of the list.
+     * @return the last element
+     */
     @Override
     public T getLast() {
         checkIfEmpty();
         return (T) items[length - 1];
     }
 
+
+    /**
+     * Removes the element at the specified index, shifting elements left.
+     * @param index the index of the element to remove
+     */
     @Override
     public void remove(int index) {
         checkIndex(index);
@@ -98,23 +147,40 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
         length--;
     }
 
+
+    /**
+     * Validates index is within bounds of list.
+     * @param index the index to validate
+     */
     private void checkIndex(int index) {
         if (index < 0 || index > length) {
             throw new IndexOutOfBoundsException("Index: " + index + " not found");
         }
     }
 
+
+    /**
+     * Removes the first element of the list.
+     */
     @Override
     public void removeFirst() {
         remove(0);
 
     }
 
+
+    /**
+     * Removes the last element of the list.
+     */
     @Override
     public void removeLast() {
         remove(length - 1);
     }
 
+
+    /**
+     * Sorts the list using the bubble sort algorithm.
+     */
     @Override
     public void sort() {
         for(int i =0 ; i< length;i++){
@@ -129,6 +195,11 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
 
     }
 
+    /**
+     * Returns the index of the first occurrence of the specified object.
+     * @param object the object to search for
+     * @return index of the object, or -1 if not found
+     */
     @Override
     public int indexOf(Object object) {
         for (int i = 0; i < length; i++) {
@@ -139,6 +210,12 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
         return -1;
     }
 
+
+    /**
+     * Returns the index of the last occurrence of the specified object.
+     * @param object the object to search for
+     * @return last index of the object, or -1 if not found
+     */
     @Override
     public int lastIndexOf(Object object) {
         for (int i = length - 1; i >= 0; i++) {
@@ -149,11 +226,22 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
         return -1;
     }
 
+
+    /**
+     * Checks if the list contains the specified object.
+     * @param object the object to find
+     * @return true if present, otherwise false
+     */
     @Override
     public boolean exists(Object object) {
         return indexOf(object) != -1;
     }
 
+
+    /**
+     * Returns a new array containing all elements in the list.
+     * @return an array of the list's contents
+     */
     @Override
     public Object[] toArray() {
         Object[] newArray = new Object[length];
@@ -163,6 +251,10 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
         return newArray;
     }
 
+
+    /**
+     * Clears all elements from the list.
+     */
     @Override
     public void clear() {
         items = new Object[5];
@@ -170,11 +262,21 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
 
     }
 
+
+    /**
+     * Returns the number of elements in the list.
+     * @return the list size
+     */
     @Override
     public int size() {
         return length;
     }
 
+
+    /**
+     * Returns an iterator over the list elements.
+     * @return an iterator for the list
+     */
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
