@@ -1,5 +1,5 @@
 public class Main {
     public static void main(String[] args) {
-        tests.MyLinkedListTest.startTest();
+        tests.MyMinHeapTest.startTest();
     }
 }

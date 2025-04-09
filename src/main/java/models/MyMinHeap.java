@@ -87,16 +87,20 @@ public class MyMinHeap<T extends Comparable<T>> implements IMyMinHeap<T> {
 
     private void minHeapify(int i) {
         if(!isleaf(i)){
-            if(minHeap.get(i).compareTo(minHeap.get(leftChild(i))) >0
-                    || minHeap.get(i).compareTo(minHeap.get(rightChild(i)))<0){
-                if(minHeap.get(leftChild(i)).compareTo(minHeap.get(rightChild(i)))<0){
-                    swap(i, leftChild(i));
-                    minHeapify(leftChild(i));
-                } else{
-                    swap(i, rightChild(i));
-                    minHeapify(rightChild(i));
-                }
-
+            int leftIndex = leftChild(i);
+            int rightIndex = rightChild(i);
+            int smallestIndex = i;
+            if(leftIndex < size() && minHeap.get(leftIndex)!=null &&
+            minHeap.get(i) != null && minHeap.get(i).compareTo(minHeap.get(leftIndex))>0){
+                smallestIndex = leftIndex;
+            }
+            if(rightIndex < size() && minHeap.get(rightIndex)!=null &&
+            minHeap.get(i) != null && minHeap.get(i).compareTo(minHeap.get(rightIndex))>0){
+                smallestIndex = rightIndex;
+            }
+            if(smallestIndex != i){
+                swap(i,smallestIndex);
+                minHeapify(smallestIndex);
             }
         }
     }
