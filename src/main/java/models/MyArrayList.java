@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
     private Object[] items;
     private int length;
-    private int capacity = 10;
+    private int capacity;
 
     public MyArrayList() {
         items = new Object[capacity];
