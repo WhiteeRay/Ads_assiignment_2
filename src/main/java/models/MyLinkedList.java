@@ -12,13 +12,15 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
 
     public MyLinkedList() {
         head = null;
+        tail = null;
         length = 0;
     }
 
 
     /**
-     * Adds an element to the end of the list.
-     * @param item the element to be added
+     * Links a new element to the linked list.
+     * If the link is the first one, it will be the head, if last a tail.
+     * @param item element to be added
      */
     @Override
     public void add(T item) {
@@ -26,15 +28,11 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
         if (head == null) {
             head = newNode;
         } else {
-            MyNode<T> current = head;
-            while (current.next != null) {
-                current = current.next;
-            }
-            current.next = newNode;
-
+            newNode.setPrev(traverse());
+            traverse().setNext(newNode);
         }
+        tail = newNode;
         length++;
-
     }
 
 
@@ -68,17 +66,17 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
     /**
      * Inserts new element between two nodes.
      * @param index   the position to insert the element at
-     * @param element the element to be inserted at the specified position
+     * @param item the element to be inserted at the specified position
      */
     @Override
-    public void add(int index, T element) {
+    public void add(int index, T item) {
         checkInIndex(index);
         if (index == 0) {
-            addFirst(element);
+            addFirst(item);
         } else if (index == length - 1) {
-            addLast(element);
+            addLast(item);
         } else {
-            MyNode<T> newNode = new MyNode<>(element);
+            MyNode<T> newNode = new MyNode<>(item);
             MyNode<T> next = traverse(index);
             MyNode<T> previous = traverse(index-1);
             previous.setNext(newNode);
@@ -104,6 +102,20 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
     }
 
     /**
+     * Private method that returns the node at the end by traversing to it from the head.
+     * O(n) time complexity.
+     * @return the node at the end
+     */
+    private MyNode<T> traverse() {
+        MyNode<T> next = head;
+        while (next.hasNext()) {
+            next = next.getNext();
+        }
+
+        return next;
+    }
+
+    /**
      * Throws IndexOutOfBoundsException if index is invalid.
      * @param index the index to validate
      */
@@ -119,8 +131,10 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
      */
     @Override
     public void addFirst(T item) {
-        add(0, item);
-
+        MyNode<T> newNode = new MyNode<>(item);
+        newNode.next = head;
+        head = newNode;
+        length++;
     }
 
     /**

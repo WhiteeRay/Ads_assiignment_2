@@ -28,5 +28,7 @@ public class MyNode<T> {
     }
 
 
-
+    public boolean hasNext() {
+        return next!=null;
+    }
 }
