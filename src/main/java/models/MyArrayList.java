@@ -6,10 +6,12 @@ import java.util.NoSuchElementException;
 public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
     private Object[] items;
     private int length;
+    private int capacity = 10;
 
     public MyArrayList() {
-        items = new Object[5];
+        items = new Object[capacity];
         length = 0;
+        capacity = 10;
     }
 
     /**
@@ -18,7 +20,7 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
      */
     @Override
     public void add(T item) {
-        if (length == items.length) {
+        if (length == capacity) {
             increaseCapacity();
         }
         items[length++] = item;
@@ -28,8 +30,8 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
      * Doubles the internal array size to accommodate more elements.
      */
     private void increaseCapacity() {
-        Object[] newItems = new Object[items.length * 2];
-        for (int i = 0; i < items.length; i++) {
+        Object[] newItems = new Object[capacity * 2];
+        for (int i = 0; i < capacity; i++) {
             newItems[i] = items[i];
         }
         items = newItems;
@@ -57,7 +59,7 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
     @Override
     public void add(int index, T item) {
         checkIndex(index);
-        if (length == items.length) {
+        if (length == capacity) {
             increaseCapacity();
         }
         for (int i = length; i > index; i--) {
