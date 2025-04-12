@@ -3,6 +3,7 @@ package models;
 public class MyNode<T> {
     T data;
     MyNode<T> next;
+    MyNode<T> prev;
 
     public MyNode(T data){
         this.data = data;
@@ -21,5 +22,11 @@ public class MyNode<T> {
     public void setNext(MyNode<T> next){
         this.next = next;
     }
+
+    public void setPrev(MyNode<T> prev){
+        this.prev = prev;
+    }
+
+
 
 }

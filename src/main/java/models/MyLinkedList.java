@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
 
 public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
     private MyNode<T> head;
+    private MyNode<T> tail;
     private int length;
 
     public MyLinkedList() {
@@ -65,31 +66,41 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
 
 
     /**
-     * Inserts an element at the specified index.
-     * @param index the index at which to insert
-     * @param item  the element to insert
+     * Inserts new element between two nodes.
+     * @param index   the position to insert the element at
+     * @param element the element to be inserted at the specified position
      */
     @Override
-    public void add(int index, T item) {
+    public void add(int index, T element) {
         checkInIndex(index);
-        MyNode<T> newNode = new MyNode<>(item);
-        if (head == null) {
-            newNode.next = head;
-            head = newNode;
+        if (index == 0) {
+            addFirst(element);
+        } else if (index == length - 1) {
+            addLast(element);
         } else {
-            MyNode<T> current = head;
-            int i = 0;
-            while (i <= index - 1) {
-                current = current.next;
-                i++;
-
-            }
-            newNode.next = current.next;
-            current.next = newNode;
+            MyNode<T> newNode = new MyNode<>(element);
+            MyNode<T> next = traverse(index);
+            MyNode<T> previous = traverse(index-1);
+            previous.setNext(newNode);
+            newNode.setNext(next);
+            next.setPrev(newNode);
+            length++;
         }
-        length++;
+    }
 
+    /**
+     * Private method that returns the node at specified index by traversing to it from the head. <br>
+     * O(n) time complexity.
+     * @param index the index to traverse to
+     * @return the node at that specified index
+     */
+    private MyNode<T> traverse(int index) {
+        MyNode<T> next = head;
+        for (int i = 0; i < index; i++) {
+            next = next.getNext();
+        }
 
+        return next;
     }
 
     /**
